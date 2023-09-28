@@ -63,7 +63,6 @@ class MainActivity : ComponentActivity() {
                                         // on below line we are specifying
                                         // text alignment.
                                         textAlign = TextAlign.Center,
-
                                         // on below line we are specifying
                                         // color for our text.
                                         color = Color.White
@@ -298,15 +297,22 @@ fun jsonParsing(
                 val courseDesc: String = response.body()!!.courseDesc
                 val coursePreq: String = response.body()!!.Prerequisites
 
-                progress.value = !progress.value
-                // on below line we are setting
-                // our data to our variables
-                name.value = courseName
-                Link.value = courseLink
-                Img.value = courseImg
-                Desc.value = courseDesc
-                requisites.value = coursePreq
-
+                // Update UI state only when there's a significant change.
+                if (courseName != name.value ||
+                    courseLink != Link.value ||
+                    courseImg != Img.value ||
+                    courseDesc != Desc.value ||
+                    coursePreq != requisites.value)
+                {
+                    // on below line we are setting
+                    // our data too ur variables
+                    name.value = courseName
+                    Link.value = courseLink
+                    Img.value = courseImg
+                    Desc.value = courseDesc
+                    requisites.value = coursePreq
+                    progress.value = !progress.value
+                }
             }
         }
 
